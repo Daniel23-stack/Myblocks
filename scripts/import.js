@@ -3,8 +3,8 @@ var capitalize = require('capitalize');
 const replace = require('replace-in-file');
 
 if (process.argv.length <= 2) {
-    console.log("Usage: " + __filename + " path/to/directory");
-    process.exit(-1);
+  console.log("Usage: " + __filename + " path/to/directory");
+  process.exit(-1);
 }
 
 var path = process.argv[2];
@@ -22,7 +22,7 @@ var block_types = [
   'testimonials'
 ]
 
-function createTsFile (itemPath, name) {
+function createTsFile(itemPath, name) {
   let newName = capitalize.words(name.split('-').join(' ')).split(' ').join('')
 
   fs.writeFile(itemPath, `import { Component, OnInit } from '@angular/core';
@@ -38,22 +38,22 @@ export class ${newName}Component implements OnInit {
   ngOnInit() {
   }
 
-}`, function(err) {
-    if(err) {
-        return console.log(err);
-    }
-});
-}
-
-function createCssFile (itemPath, name) {
-  fs.writeFile(itemPath, ``, function(err) {
-    if(err) {
-        return console.log(err);
+}`, function (err) {
+    if (err) {
+      return console.log(err);
     }
   });
 }
 
-function createSpecFile (itemPath, name) {
+function createCssFile(itemPath, name) {
+  fs.writeFile(itemPath, ``, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+  });
+}
+
+function createSpecFile(itemPath, name) {
   let newName = capitalize.words(name.split('-').join(' ')).split(' ').join('')
 
   fs.writeFile(itemPath, `import { ComponentFixture, TestBed, async } from '@angular/core/testing';
@@ -80,11 +80,11 @@ describe('${newName}Component', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});`, function(err) {
-    if(err) {
-        return console.log(err);
+});`, function (err) {
+    if (err) {
+      return console.log(err);
     }
-});
+  });
 }
 
 function copyFile(itemPath, newPath) {
@@ -100,13 +100,13 @@ function copyFile(itemPath, newPath) {
 }
 
 function readContents(path, block_types) {
-  fs.readdir(path, function(err, items) {
-      for (var i = 0; i < items.length; i++) {
-        copyFile(`${path}/${items[i]}`, `src/app/${block_types}/${items[i].split('.html').join('.component.html')}`)
-        createTsFile(`src/app/${block_types}/${items[i].split('.html')[0]}.component.ts`, items[i].split('.html')[0])
-        createCssFile(`src/app/${block_types}/${items[i].split('.html')[0]}.component.css`, items[i].split('.html')[0])
-        createSpecFile(`src/app/${block_types}/${items[i].split('.html')[0]}.spec.ts`, items[i].split('.html')[0])
-      }
+  fs.readdir(path, function (err, items) {
+    for (var i = 0; i < items.length; i++) {
+      copyFile(`${path}/${items[i]}`, `src/app/${block_types}/${items[i].split('.html').join('.component.html')}`)
+      createTsFile(`src/app/${block_types}/${items[i].split('.html')[0]}.component.ts`, items[i].split('.html')[0])
+      createCssFile(`src/app/${block_types}/${items[i].split('.html')[0]}.component.css`, items[i].split('.html')[0])
+      createSpecFile(`src/app/${block_types}/${items[i].split('.html')[0]}.spec.ts`, items[i].split('.html')[0])
+    }
   });
 }
 
