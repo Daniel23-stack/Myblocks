@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'features', component: FeaturesComponent },
   { path: 'footers', component: FootersComponent },
   { path: 'forms', component: FormsComponent },
-  { path: 'headers', component: HeadersComponent },
+  // { path: 'headers', component: HeadersComponent },
   { path: 'pricings', component: PricingsComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'testimonials', component: TestimonialsComponent }
