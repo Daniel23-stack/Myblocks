@@ -16,9 +16,13 @@ tmpl += `<input class="textBox" type="text" id="testimonials-temp" />`
 export class TestimonialsComponent {
 
   getContent(id) {
-    var $temp = $("#testimonials-temp");
-    $temp.val($(id).html()).select();
-    document.execCommand("copy");
-    $temp.remove();
+    // var $temp = $("#testimonials-temp");
+    // $temp.val($(id).html()).select();
+    // document.execCommand("copy");
+    // $temp.remove();
+    window.parent.postMessage({
+      'func': 'parentFunc',
+      'message': $(id).html()
+    }, "*");
   }
 }

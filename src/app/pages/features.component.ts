@@ -16,9 +16,13 @@ tmpl += `<input class="textBox" type="text" id="features-temp" />`
 export class FeaturesComponent {
 
   getContent(id) {
-    var $temp = $("#features-temp");
-    $temp.val($(id).html()).select();
-    document.execCommand("copy");
-    $temp.remove();
+    // var $temp = $("#features-temp");
+    // $temp.val($(id).html()).select();
+    // document.execCommand("copy");
+    // $temp.remove();
+    window.parent.postMessage({
+      'func': 'parentFunc',
+      'message': $(id).html()
+    }, "*");
   }
 }

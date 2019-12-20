@@ -16,9 +16,13 @@ tmpl += `<input class="textBox" type="text" id="call-to-action-temp" />`
 export class CallToActionComponent {
 
   getContent(id) {
-    var $temp = $("#call-to-action-temp");
-    $temp.val($(id).html()).select();
-    document.execCommand("copy");
-    $temp.remove();
+    // var $temp = $("#call-to-action-temp");
+    // $temp.val($(id).html()).select();
+    // document.execCommand("copy");
+    // $temp.remove();
+    window.parent.postMessage({
+      'func': 'parentFunc',
+      'message': $(id).html()
+    }, "*");
   }
 }
